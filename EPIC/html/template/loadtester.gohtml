@@ -1,0 +1,282 @@
+{{ template "base.gohtml" . }}
+{{ define "css" }}
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+
+
+{{ end}}
+
+{{ define "navbar" }}
+
+{{ end }}
+
+<!-- ============= CONTENT ============== -->
+{{ define "content" }}
+<!-- ============= TOP ============== -->
+<div class="card mt-3"></div>
+
+<!-- ============= TOP ============== -->
+<div class="card mt-3"></div>
+<!-- ============= BOTTOM ============== -->
+
+{{if .IsActionCreateJob }}
+
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Epic Creator</h3>
+                        <p>You can create a new Epic from existing Test Cases/Epics. </br>
+                            The job will run in the order listed on the right.</p>
+
+                        <form class="requires-validation" novalidate method="post">
+                            <div class="row">
+                                <label for="title">EndPoints List</label><br />
+                                <select  name="lstBoxEP" id="lstBoxEP" style="width:300px;">
+                                    {{ range $key, $value := .DynamicList }}
+
+                                        <option value="{{ $value }}">{{ $key }}</option>
+                                    {{ end }}
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="title">Pick List</label><br />
+                                    <select multiple="multiple" id="lstBox1" style="width:150px;">
+                                        {{ range $key, $value := .DynamicMap }}
+
+                                            <option value="{{ $value }}">{{ $key }}</option>
+                                        {{ end }}
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type='button' id='btnRightAll' value='  >>  ' /><br />
+                                    <input type='button' id='btnRight' value='  >  ' /><br />
+                                    <input type='button' id='btnLeft' value='  <  ' /><br />
+                                    <input type='button' id='btnLeftAll' value='  <<  ' /><br />
+
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="title">New Epic</label><br />
+                                    <select multiple="multiple" id="lstBox2", name="lstBox2" style="width:150px;" data-style="btn-success" >
+
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Submit -->
+                            <div class="mt-2 row g-3">
+                                <div class="mt-3 col-md-2">
+                                    <label class="form-check-label" for="chkConfirm">
+                                        OK?
+                                    </label>
+                                </div>
+                                <div class="mt-3 col-md-1">
+                                    <input class="form-check-input" type="checkbox" value="" id="chkConfirm">
+                                </div>
+                                <div class="form-button col-auto">
+                                    <input type="submit" class="btn btn-primary mb-3" id="submit" name="submit" value="Create Job">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{{else}}
+
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <form class="requires-validation" novalidate method="post">
+
+                            <div class="mt-2 row g-4">
+                                <div class="col-md-1">
+                                    <label for="lstBoxLoad" >LoadTest List:</label>
+                                </div>
+                                <div class="col-md-4">
+                                <select  name="lstBoxLoad" id="lstBoxLoad" style="width:300px;">
+                                    {{ range $key, $value := .DynamicList }}
+
+                                        <option value="{{ $value }}">{{ $key }}</option>
+                                    {{ end }}
+                                </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="numdroids" >NumDroids:</label>
+                                </div>
+                                <div class="col-md-1">
+                                    <input  class="form-control" type="text" name="numdroids" id="numdroids" value="1">
+                                </div>
+
+                            </div>
+
+                            <div class="mt-2 row g-4">
+                            </div>
+
+                            <div class="mt-2 row g-4">
+
+                                <div class="col-auto">
+                                    <label class="form-check-label" for="chkConfirm">
+                                        OK?
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" value="" id="chkConfirm" onchange="document.getElementById('submit').disabled = !this.checked;">
+                                </div>
+                                <div class="col-auto">
+                                    <input type="submit" class="btn btn-primary mb-3" id="submit" name="submit" value="Run" disabled>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{{end}}
+
+
+    <h2>Test Log From WebSocket </h2>
+    <div id="output">{{.WebSocketOutput}}</div>
+
+
+
+
+<!-- ============= BOTTOM ============== -->
+{{ end }}
+<!-- ============= CONTENT END ============== -->
+
+{{ define "js" }}
+
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+
+
+    <script type="text/javascript" class="init">
+
+        $.fn.dataTable.ext.buttons.alert = {
+            className: 'buttons-alert',
+            action: function ( e, dt, node, config ) {
+                alert( this.text() );
+            }
+        };
+
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                "ajax": {{ .DataURL}},
+
+
+            } );
+
+            $('#example tbody').on( 'click', 'tr', function () {
+                document.getElementById("name").value = $('#example').DataTable().row( this ).data()[0] ; //  document.getElementById("field1").value;
+                document.getElementById("url").value = $('#example').DataTable().row( this ).data()[1] ;
+            } );
+
+        } );
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            function moveItems(origin, dest) {
+                $(origin).find(':selected').appendTo(dest);
+            }
+
+            function moveAllItems(origin, dest) {
+                $(origin).children().appendTo(dest);
+            }
+
+            $('#btnLeft').click(function () {
+                moveItems('#lstBox2', '#lstBox1');
+            });
+
+            $('#btnRight').on('click', function () {
+                moveItems('#lstBox1', '#lstBox2');
+            });
+
+            $('#btnLeftAll').on('click', function () {
+                moveAllItems('#lstBox2', '#lstBox1');
+            });
+
+            $('#btnRightAll').on('click', function () {
+                moveAllItems('#lstBox1', '#lstBox2');
+            });
+        });
+    </script>
+
+    <script language="javascript" type="text/javascript">
+
+        var wsUri = "ws://33efdd264eac.ngrok.io/ws";
+        //var wsUri = "wss://192.168.0.189:8080/ws";
+        //var wsUri = "ws://localhost:8081/ws";
+        var output;
+
+        function initws()
+        {
+            output = document.getElementById("output");
+            websocket = new WebSocket(wsUri);
+            //testWebSocket();
+        }
+
+        function testWebSocket()
+        {
+            websocket.onopen = function(evt) { onOpen(evt) };
+            websocket.onclose = function(evt) { onClose(evt) };
+            websocket.onmessage = function(evt) { onMessage(evt) };
+            websocket.onerror = function(evt) { onError(evt) };
+        }
+
+        function onOpen(evt)
+        {
+            writeToScreen("CONNECTED");
+        }
+
+        function onClose(evt)
+        {
+            writeToScreen("DISCONNECTED");
+            output = "";
+        }
+
+        function onMessage(evt)
+        {
+            var message = evt.data;
+            writeToScreen('<span style="color: blue;">RESPONSE: ' + message+'</span>');
+        }
+
+        function onError(evt)
+        {
+            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+
+        function doSend(message)
+        {
+            writeToScreen("SENT: " + message);
+            websocket.send(message);
+        }
+
+        function writeToScreen(message)
+        {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+
+        window.addEventListener("load", initws, false);
+
+    </script>
+
+{{ end}}

@@ -1,0 +1,55 @@
+{
+   "TID":"TE-0004",
+   "Name":"TestEpic",
+   "Description":"",
+   "Notes":"",
+   "PassStatus":"",
+   "TestCases":[
+      {
+         "TID":"TC-0002",
+         "Name":"APIKEY Accepts GET method",
+         "Description":"Check that only GET method is allowed.",
+         "Notes":"",
+         "PassStatus":"",
+         "Action":{
+            "Command":"GET",
+            "URL":"api/v1/goschool/getkey",
+            "Header":null,
+            "Payload":"",
+            "PassStatus":"",
+            "StatusHasText":"OK",
+            "StatusHasCode":200,
+            "BodyHasText":"APIKEY ",
+            "ResponseTime":100000000,
+            "Name":"",
+            "AsParam":"",
+            "AsHeader":"",
+            "AsURL":"",
+            "ResponseHasKey":true
+         }
+      },
+      {
+         "TID":"TC-0004",
+         "Name":"Check GET Course Response Is As Expected.",
+         "Description":"Check GET api/v1/goschool/course response is as expected.",
+         "Notes":"",
+         "PassStatus":"",
+         "Action":{
+            "Command":"GET",
+            "URL":"api/v1/goschool/course",
+            "Header":null,
+            "Payload":"{\"ID\": \"YODA123\"}",
+            "PassStatus":"",
+            "StatusHasText":"OK",
+            "StatusHasCode":200,
+            "BodyHasText":":",
+            "ResponseTime":100000000,
+            "Name":"",
+            "AsParam":"Y",
+            "AsHeader":"",
+            "AsURL":"",
+            "ResponseHasKey":false
+         }
+      }
+   ]
+}

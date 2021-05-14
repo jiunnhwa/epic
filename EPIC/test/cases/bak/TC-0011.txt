@@ -1,0 +1,23 @@
+{
+   "TID":"TC-0011",
+   "Name":"PUT api/v1/school/course",
+   "Description":"Check PUT api/v1/school/course response is as expected.",
+   "Notes":"",
+   "PassStatus":"",
+   "Action":{
+      "Command":"PUT",
+      "URL":"api/v1/goschool/course",
+      "Header":null,
+      "Payload":"{\"ID\":\\\"YODA123\"}",
+      "PassStatus":"",
+      "StatusHasText":"OK",
+      "StatusHasCode":200,
+      "BodyHasText":"OK",
+      "ResponseTime":100000000,
+      "Name":"",
+      "AsParam":"",
+      "AsHeader":"",
+      "AsURL":"",
+      "ResponseHasKey":false
+   }
+}

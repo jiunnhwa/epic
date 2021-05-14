@@ -1,0 +1,23 @@
+{
+   "TID":"TC-0013",
+   "Name":"APIKEY Format",
+   "Description":"APIKEY is in alphanumeric UUID format",
+   "Notes":"",
+   "PassStatus":"",
+   "Action":{
+      "Command":"GET",
+      "URL":"api/v1/goschool/getkey",
+      "Header":null,
+      "Payload":"",
+      "PassStatus":"",
+      "StatusHasText":"OK",
+      "StatusHasCode":200,
+      "BodyHasText":"key",
+      "ResponseTime":100000000,
+      "Name":"",
+      "AsParam":"",
+      "AsHeader":"",
+      "AsURL":"",
+      "ResponseHasKey":false
+   }
+}

@@ -1,0 +1,23 @@
+{
+   "TID":"TC-0014",
+   "Name":"APIKEY Expiration Value",
+   "Description":"APIKEY expiration value is 5 mins",
+   "Notes":"",
+   "PassStatus":"",
+   "Action":{
+      "Command":"GET",
+      "URL":"api/v1/goschool/getkey",
+      "Header":null,
+      "Payload":"",
+      "PassStatus":"",
+      "StatusHasText":"OK",
+      "StatusHasCode":200,
+      "BodyHasText":"5",
+      "ResponseTime":100000000,
+      "Name":"",
+      "AsParam":"",
+      "AsHeader":"",
+      "AsURL":"",
+      "ResponseHasKey":false
+   }
+}

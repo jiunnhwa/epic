@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .PageTitle }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <style type="text/css">
+        @media all and (min-width: 992px) {
+            .navbar .nav-item .dropdown-menu{ display: none; }
+            .navbar .nav-item:hover .nav-link{   }
+            .navbar .nav-item:hover .dropdown-menu{ display: block; }
+            .navbar .nav-item .dropdown-menu{ margin-top:0; }
+        }
+    </style>
+
+    {{ block "css" . }}{{ end }}
+
+
+</head>
+<body>
+<div class="container">
+    <!-- ============= NAV ============== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">EPIC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"  aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main_nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active"> <a class="nav-link" href="/">Home </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">  Manage  </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/endpoints">  Endpoints </a></li>
+                            <li><a class="dropdown-item" href="/cases"> Cases </a></li>
+                            <li><a class="dropdown-item" href="/epics"> Epics </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item active"> <a class="nav-link" href="/jobs"> Jobs </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">  Additional  </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/loadtester"> Performance Test </a></li>
+                            <li><a class="dropdown-item" style="color:grey; font-weight: lighter" href="#"> Security - SQL Injection </a></li>
+                            <li><a class="dropdown-item" style="color:grey; font-weight: lighter" href="#"> Broken Links Checker </a></li>
+                            <li><a class="dropdown-item" style="color:grey; font-weight: lighter" href="#"> Fuzzing </a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#"> Sign Up </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"> Account </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"> Settings</a></li>
+                            {{if .HasSessionID }}
+                                <li><a class="dropdown-item" style="color:orangered; font-weight: bold" href="/logout"> Logout </a></li>
+                            {{else}}
+                                <li><a class="dropdown-item" style="color:green; font-weight: bold" href="/login"> Login </a></li>
+                            {{end}}
+
+                        </ul>
+                    </li>
+                </ul>
+            </div> <!-- navbar-collapse.// -->
+        </div> <!-- container-fluid.// -->
+    </nav>
+    <!-- ============= NAV END// ============== -->
+</div>
+
+    <div class="container">
+        {{ block "content" . }}{{ end }}
+    </div>
+
+
+
+
+
+    {{ block "js" . }}{{ end }}
+</body>
+</html>

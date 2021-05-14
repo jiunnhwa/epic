@@ -1,0 +1,23 @@
+{
+   "TID":"TC-0000",
+   "Name":"WAIT command",
+   "Description":"Waits for the specified duration",
+   "Notes":"",
+   "PassStatus":"",
+   "Action":{
+      "Command":"WAIT(1m)",
+      "URL":"",
+      "Header":null,
+      "Payload":"",
+      "PassStatus":"",
+      "StatusHasText":"",
+      "StatusHasCode":0,
+      "BodyHasText":"",
+      "ResponseTime":0,
+      "Name":"",
+      "AsParam":"",
+      "AsHeader":"",
+      "AsURL":"",
+      "ResponseHasKey":false
+   }
+}
