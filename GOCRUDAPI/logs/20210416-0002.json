@@ -1,0 +1,1 @@
+{"ID":"20210416-0002","Name":"POST/course/YODA123","StartTime":"2021-04-16T19:04:24.5439325+08:00","EndTime":"2021-04-16T19:04:24.5579316+08:00","Request":"","Response":"","Result":"{\"Result\":-1,\"Err\":{\"Number\":1062,\"Message\":\"Duplicate entry 'YODA123' for key 'PRIMARY'\"}}","Error":{"Code":0,"Message":""}}
