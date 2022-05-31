@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <base href="file:///C:\Users\FX1\Desktop\GOSCHOOL\PROJECT GOLIVE\Artifacts\md\" />
+  <meta charset="utf-8" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link href="file:///C:\Users\FX1\AppData\Local\Markdown Monster\PreviewThemes\Dharkan\..\scripts\fontawesome\css\font-awesome.min.css" rel="stylesheet" />
+
+  <link href="file:///C:\Users\FX1\AppData\Local\Markdown Monster\PreviewThemes\Dharkan\Theme.css" rel="stylesheet" />
+
+  <script src="file:///C:\Users\FX1\AppData\Local\Markdown Monster\PreviewThemes\Dharkan\..\scripts\jquery.min.js"></script>
+  <link href="file:///C:\Users\FX1\AppData\Local\Markdown Monster\PreviewThemes\Dharkan\..\scripts\highlightjs\styles\twilight.css" rel="stylesheet" />
+  <script src="file:///C:\Users\FX1\AppData\Local\Markdown Monster\PreviewThemes\Dharkan\..\scripts\highlightjs\highlight.pack.js"></script>
+  <script src="file:///C:\Users\FX1\AppData\Local\Markdown Monster\PreviewThemes\Dharkan\..\scripts\preview.js" id="PreviewScript"></script>
+  
+</head>
+<body>
+<div id="MainContent">
+    <!-- Markdown Monster Content -->
+    <h1 id="test-runs">Test Runs</h1>
+	<h3>(Assorted test videos can be found in /Artifacts/vid)</h3>
+<p>Many load test has been done using EPIC to load onto the Test Server.
+This document various test job runs.</p>
+<p>This guide contains the following:<br>
+7.2 Test: Get Course Requires APIKEY, With Wait(1m)</p>
+<ol type="A">
+<li>Load Test 10,000</li>
+<li>Load Test 100</li>
+</ol>
+<h2 id="72-test-get-course-requires-apikey-with-wait1m">7.2 Test: Get Course Requires APIKEY, With Wait(1m)</h2>
+<p>Without APIKEY, GET course returns &quot;Empty APIKEY. Please provide a valid key.&quot;<br>
+Wait for 1m, to validate waiting action.
+Then GET APIKEY
+Then GET course
+<img src="../vid/Test-GetWaitGetGet.gif" alt="" /></p>
+<h2 id="a-load-test-10000">A. Load Test 10,000</h2>
+<p>A test was also done with 10K goroutines, but the screen recording was in GB.
+For the record,</p>
+<ul>
+<li>Run was completed in about 20 minutes.</li>
+<li>there seem to be some 'throtlling' at the goroutine(10K was not all spun up instantly)</li>
+<li>websockets messages(on firefox browser) was still pumping even though EPIC and Test Server had finished.</li>
+</ul>
+<h2 id="a-load-test-100">A. Load Test 100</h2>
+<p>This test runs a load of 100 goroutines.</p>
+<p><img src="../vid/LoadTest100.gif" alt="" /></p>
+
+    <!-- End Markdown Monster Content -->
+</div>
+</body>
+</html>
